@@ -1,0 +1,4 @@
+data_files:
+  - original.txt  #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych oryginalnych
+  - smoothed Kalman.txt #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych wygładzonych
+  - referencyjne.txt #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych referencyjnych

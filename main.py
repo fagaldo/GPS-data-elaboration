@@ -1,9 +1,12 @@
+import math
+
 from mpl_toolkits.mplot3d.art3d import Line3D
 import matplotlib.pyplot as plt
 import numpy as np
 import re
 from scipy.interpolate import interp1d
-from scipy.interpolate import UnivariateSpline
+import yaml
+import os
 
 def euclidean_distance(p1, p2):
     return np.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
@@ -26,16 +29,183 @@ def interpolate_reference(ref_data, num_points):
     return interpolated_ref_data
 
 
+# Ścieżka do pliku konfiguracyjnego
+config_path = 'config.yaml'
+
+# Odczyt pliku konfiguracyjnego
+with open(config_path, 'r') as config_file:
+    config = yaml.safe_load(config_file)
+
+ # Pobranie ścieżek do plików z danymi
+data_files = config['data_files']
+original_data = []
+smoothed_data = []
+ref_data = []
+
+# Ładowanie danych z plików
+for file_path in data_files:
+    full_path = os.path.join(os.getcwd(), file_path)
+    with open(full_path, 'r') as data_file:
+        for line in data_file:
+            match = re.search(r'Point (\d+):Latitude:([\d.]+)\sLongitude:([\d.]+)', line)
+            if match:
+                point_index = int(match.group(1))
+                lat = float(match.group(2))
+                lon = float(match.group(3))
+                original_data.append((point_index, lat, lon))
+    with open(full_path, "r") as file:
+        for line in file:
+            match = re.search(r'Point (\d+): Lat: ([\d.]+), Long: ([\d.]+), MAE: ([\d.]+), Group: (\d+), Time: (\d+)', line)
+            if match:
+                point_index = int(match.group(1))
+                lat = float(match.group(2))
+                lon = float(match.group(3))
+                mae = float(match.group(4))
+                group = int(match.group(5))
+                time = int(match.group(6))
+                smoothed_data.append((point_index, lat, lon, mae, group, time))
+    with open(full_path, "r") as file:
+        for line in file:
+            match = re.search(r'([\d.]+), ([\d.]+)', line)
+            if match:
+                lon = float(match.group(1))
+                lat = float(match.group(2))
+                ref_data.append((lat, lon))
+
+smoothed_data = np.array(smoothed_data)
+original_data = np.array(original_data)
+ref_data = np.array(ref_data)
+interpolated_ref_data = np.array(interpolate_reference(ref_data, len(smoothed_data)))
+
+
+def group_data(data):
+    grouped_data = {}
+    for point in data:
+        group = point[4]
+        if group not in grouped_data:
+            grouped_data[group] = []
+        grouped_data[group].append(point)
+    return grouped_data
+
+
+def group_data_by_original(original_data, smoothed_data):
+    """
+    Grupuje dane oryginalne według grup z danych wygładzonych.
+    """
+    grouped_data = {}
+    for smooth_point, orig_point in zip(smoothed_data, original_data):
+        group = smooth_point[4]  # Grupa z danych wygładzonych
+        if group not in grouped_data:
+            grouped_data[group] = []
+        grouped_data[group].append(orig_point)
+    return grouped_data
+
+
+def calculate_groups_errors(grouped_smoothed_data, grouped_original_data, ref_data):
+    total_error_smoothed = 0
+    total_error_original = 0
+    total_squared_error_smoothed = 0
+    total_squared_error_original = 0
+    total_absolute_error_smoothed = 0
+    total_absolute_error_original = 0
+    errors_smoothed = []
+    errors_original = []
+    num_groups = len(grouped_smoothed_data)
+
+    for group, group_points_smoothed in grouped_smoothed_data.items():
+        # Find the representative point in the smoothed group closest to any reference point
+        rep_point_smoothed, rep_point_index = min(
+            ((p[1:3], idx) for idx, p in enumerate(group_points_smoothed)),
+            key=lambda pi: euclidean_distance(pi[0], find_closest_point(pi[0], ref_data))
+        )
+        closest_ref_point = find_closest_point(rep_point_smoothed, ref_data)
+
+        # Find the closest point in the original group to the representative point of the smoothed group
+        group_points_original = grouped_original_data[group]
+        closest_point_original, closest_point_index = min(
+            ((p[1:3], idx) for idx, p in enumerate(group_points_original)),
+            key=lambda pi: euclidean_distance(rep_point_smoothed, pi[0])
+        )
+
+        # Calculate errors
+        error_smoothed = euclidean_distance(rep_point_smoothed, closest_ref_point)
+        error_original = euclidean_distance(closest_point_original, closest_ref_point)
+
+        total_error_smoothed += error_smoothed
+        total_error_original += error_original
+
+        total_squared_error_smoothed += error_smoothed ** 2
+        total_squared_error_original += error_original ** 2
+
+        total_absolute_error_smoothed += abs(error_smoothed)
+        total_absolute_error_original += abs(error_original)
+
+        errors_smoothed.append(error_smoothed)
+        errors_original.append(error_original)
+
+        # Print selected indices
+        print(
+            f'Group: {group}, Selected smoothed point index: {rep_point_index}, Selected original point index: {closest_point_index}')
+
+    mean_error_smoothed = total_error_smoothed / num_groups
+    mean_error_original = total_error_original / num_groups
+
+    mse_smoothed = total_squared_error_smoothed / num_groups
+    mse_original = total_squared_error_original / num_groups
+
+    mae_smoothed = total_absolute_error_smoothed / num_groups
+    mae_original = total_absolute_error_original / num_groups
+
+    rmse_smoothed = math.sqrt(mse_smoothed)
+    rmse_original = math.sqrt(mse_original)
+
+    median_error_smoothed = np.median(errors_smoothed)
+    median_error_original = np.median(errors_original)
+
+    return mean_error_smoothed, mean_error_original, mse_smoothed, mse_original, mae_smoothed, mae_original, rmse_smoothed, rmse_original, median_error_smoothed, median_error_original
+
+
+def calculate_group_mean(grouped_data, ref_data):
+    total_error = 0
+    num_groups = len(grouped_data)
+    for group_points in grouped_data.values():
+        # Find the representative point as the one closest to any reference point
+        rep_point = min(group_points, key=lambda p: euclidean_distance(p[1:3], find_closest_point(p[1:3], ref_data)))[
+                    1:3]
+        closest_ref_point = find_closest_point(rep_point, ref_data)
+        error = euclidean_distance(rep_point, closest_ref_point)
+        total_error += error
+    mean_error = total_error / num_groups
+    return mean_error
+
+
+def find_closest_point(target_point, reference_points):
+    """
+    Znajduje najbliższy punkt do target_point wśród reference_points.
+    """
+    closest_point = reference_points[0]
+    min_distance = euclidean_distance(target_point, closest_point)
+    for point in reference_points[1:]:
+        distance = euclidean_distance(target_point, point)
+        if distance < min_distance:
+            min_distance = distance
+            closest_point = point
+    return closest_point
+
+
 def calculate_mean_euclidean_error(smoothed_data, ref_data):
     """
     Oblicza błąd pomiędzy danymi wygładzonymi a danymi referencyjnymi.
     """
+    errors = []
     total_error = 0
     num_points = len(smoothed_data)
     for i in range(num_points):
         error = euclidean_distance(smoothed_data[i][1:], ref_data[i])
+        errors.append(error)
         total_error += error
     mean_error = total_error / num_points
+    print("mediana dla kolejnych punktów:", np.median(errors))
     return mean_error
 
 
@@ -43,7 +213,7 @@ def calculate_mse(smoothed_data, ref_data):
     """
     Oblicza błąd średniokwadratowy (MSE) pomiędzy danymi wygładzonymi a danymi referencyjnymi przy użyciu NumPy.
     """
-    smoothed_data = np.array(smoothed_data)[:, 1:]  # Pomiń pierwszą kolumnę, przekonwertuj na NumPy array
+    smoothed_data = np.array(smoothed_data)[:, 1:3]  # Pomiń pierwszą kolumnę, przekonwertuj na NumPy array
     ref_data = np.array(ref_data)
     squared_error = np.sum((smoothed_data - ref_data) ** 2, axis=1)
     mean_squared_error = np.mean(squared_error)
@@ -52,7 +222,7 @@ def calculate_mse(smoothed_data, ref_data):
 
 def calculate_mae(smoothed_data, ref_data):
     # Przekształcenie danych wejściowych na tablice NumPy i pominiecie pierwszej kolumny w smoothed_data, jeśli jest to potrzebne
-    smoothed_array = np.array(smoothed_data)[:, 1:]  # Zakładamy, że pierwsza kolumna to czas lub inny identyfikator
+    smoothed_array = np.array(smoothed_data)[:, 1:3]  # Zakładamy, że pierwsza kolumna to czas lub inny identyfikator
     ref_array = np.array(ref_data)
 
     # Obliczenie wartości bezwzględnych różnic pomiędzy odpowiadającymi sobie elementami
@@ -64,56 +234,39 @@ def calculate_mae(smoothed_data, ref_data):
     return mean_absolute_error
 
 
-# Wczytanie danych wygładzonych z pliku tekstowego
-smoothed_data = []
-with open("smoothed MAFuzzy.txt", "r") as file:
-    for line in file:
-        match = re.search(r'Point (\d+): Lat: ([\d.]+), Long: ([\d.]+)', line)
-        if match:
-            point_index = int(match.group(1))
-            lat = float(match.group(2))
-            lon = float(match.group(3))
-            smoothed_data.append((point_index, lat, lon))
+grouped_smoothed_data = group_data(smoothed_data)  # Grupy dla wygładzonych danych
+grouped_original_data = group_data_by_original(original_data, smoothed_data)  # Grupy dla oryginalnych danych na podstawie grup z wygładzonych danych
+#print("Ilość grup:", len(grouped_smoothed_data))
+#print("Ilość grup2:", len(grouped_original_data))
+mean_error, mean_error3, mse, mse2, mae, mae2, rmsd, rmsd2, median, median2 = calculate_groups_errors(grouped_smoothed_data, grouped_original_data, interpolated_ref_data)
+mean_error2 = calculate_group_mean(grouped_smoothed_data, ref_data)
+mean_error_no_groups = calculate_mean_euclidean_error(smoothed_data, interpolated_ref_data)
+mse_no_groups = calculate_mse(smoothed_data, interpolated_ref_data)
+mae_no_groups = calculate_mae(smoothed_data, interpolated_ref_data)
 
-smoothed_data = np.array(smoothed_data)
-ref_data = []
-with open("referencyjne.txt", "r") as file:
-    for line in file:
-        match = re.search(r'([\d.]+), ([\d.]+)', line)
-        if match:
-            lon = float(match.group(1))
-            lat = float(match.group(2))
-            ref_data.append((lat, lon))
-ref_data = np.array(ref_data)
-interpolated_ref_data = np.array(interpolate_reference(ref_data, len(smoothed_data)))
-mean_error = calculate_mean_euclidean_error(smoothed_data, interpolated_ref_data)
-mse = calculate_mse(smoothed_data, interpolated_ref_data)
-mae = calculate_mae(smoothed_data, interpolated_ref_data)
+print("Średni błąd najlepszych z grup wygładzonych: ", mean_error)
+print("Średni błąd najlepszych z grup wygładzonych względem niezinterpolowanych: ", mean_error2)
+print("MSE najlepszych z grup wygładzonych: ", mse)
+print("MAE najlepszych z grup wygładzonych: ", mae)
+print("RMSE najlepszych z grup wygładzonych: ", rmsd)
+print("Błąd medianowy z grup wygładzonych: ", median)
+print("Średni błąd odległości euklidesowych bez uwzględniania grup danych wygładzonych: ", mean_error_no_groups)
+print("Średni błąd MSE bez uwzględniania grup danych wygładzonych: ", mse_no_groups)
+print("Średni błąd MAE bez uwzględniania grup danych wygładzonych: ", mae_no_groups)
+mean_error_no_groups2 = calculate_mean_euclidean_error(original_data, interpolated_ref_data)
+mse_no_groups2 = calculate_mse(original_data, interpolated_ref_data)
+mae_no_groups2 = calculate_mae(original_data, interpolated_ref_data)
+print("Średni błąd najlepszych z grup oryginalnych: ", mean_error3)
+print("MSE najlepszych z grup oryginalnych: ", mse2)
+print("MAE najlepszych z grup oryginalnych: ", mae2)
+print("RMSE najlepszych z grup oryginalnych: ", rmsd2)
+print("Błąd medianowy z grupy oryginalnych: ", median2)
+print("Średni błąd odległości euklidesowych bez uwzględniania grup danych oryginalnych: ", mean_error_no_groups2)
+print("Średni błąd MSE bez uwzględniania grup danych oryginalnych: ", mse_no_groups2)
+print("Średni błąd MAE bez uwzględniania grup danych oryginalnych: ", mae_no_groups2)
 
-print("Średni błąd: ", mean_error)
-print("MSE: ", mse)
-print("MAE: ", mae)
-# Wczytanie danych oryginalnych z pliku tekstowego
-original_data = []
-with open("original.txt", "r") as file:
-    for line in file:
-        match = re.search(r'Point (\d+):Latitude:([\d.]+)\sLongitude:([\d.]+)', line)
-        if match:
-            point_index = int(match.group(1))
-            lat = float(match.group(2))
-            lon = float(match.group(3))
-            original_data.append((point_index, lat, lon))
 
-original_data = np.array(original_data)
-mean_error2 = calculate_mean_euclidean_error(original_data, interpolated_ref_data)
-mse2 = calculate_mse(original_data, interpolated_ref_data)
-mae2 = calculate_mae(original_data, interpolated_ref_data)
-print("Średni błąd2: ", mean_error2)
-print("MSE2: ", mse2)
-print("MAE2: ", mae2)
-# Obliczenie błędów
-
-errors = np.linalg.norm(np.array(interpolated_ref_data) - smoothed_data[:, 1:], axis=1)
+errors = np.linalg.norm(np.array(interpolated_ref_data) - smoothed_data[:, 1:3], axis=1)
 
 
 # Obliczenie mediany
