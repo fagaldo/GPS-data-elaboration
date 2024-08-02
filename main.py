@@ -8,25 +8,48 @@ from scipy.interpolate import interp1d
 import yaml
 import os
 
+
 def euclidean_distance(p1, p2):
-    return np.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
+    return np.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
 
 
-def interpolate_reference(ref_data, num_points):
+def haversine_distance(coord1, coord2):
     """
-    Interpoluje dodatkowe punkty referencyjne, aby uzyskać równomiernie rozmieszczone punkty na całej ścieżce.
+    Calculate the Haversine distance between two geographical coordinates.
+    """
+    R = 6371.0  # Earth radius in kilometers
+
+    lat1, lon1 = np.radians(coord1)
+    lat2, lon2 = np.radians(coord2)
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = np.sin(dlat / 2) ** 2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2) ** 2
+    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
+
+    distance = R * c
+    return distance
+
+
+def interpolate_reference(data, num_points):
+    """
+    Interpolates additional reference points to obtain evenly spaced points along the path.
     """
     total_distance = 0
     distances = [0]
-    for i in range(1, len(ref_data)):
-        dist = euclidean_distance(ref_data[i], ref_data[i-1])
+    for i in range(1, len(data)):
+        print(data[i])
+        print(i.__str__())
+        dist = haversine_distance(data[i], data[i - 1])
         total_distance += dist
         distances.append(total_distance)
-    f_lat = interp1d(distances, [point[0] for point in ref_data], kind='linear')
-    f_lon = interp1d(distances, [point[1] for point in ref_data], kind='linear')
+
+    f_lat = interp1d(distances, [point[0] for point in data], kind='linear')
+    f_lon = interp1d(distances, [point[1] for point in data], kind='linear')
     new_distances = np.linspace(0, total_distance, num_points)
-    interpolated_ref_data = [(f_lat(dist), f_lon(dist)) for dist in new_distances]
-    return interpolated_ref_data
+    interpolated_data = [(f_lat(dist), f_lon(dist)) for dist in new_distances]
+    return interpolated_data
 
 
 # Ścieżka do pliku konfiguracyjnego
@@ -36,7 +59,7 @@ config_path = 'config.yaml'
 with open(config_path, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
- # Pobranie ścieżek do plików z danymi
+# Pobranie ścieżek do plików z danymi
 data_files = config['data_files']
 original_data = []
 smoothed_data = []
@@ -55,7 +78,8 @@ for file_path in data_files:
                 original_data.append((point_index, lat, lon))
     with open(full_path, "r") as file:
         for line in file:
-            match = re.search(r'Point (\d+): Lat: ([\d.]+), Long: ([\d.]+), MAE: ([\d.]+), Group: (\d+), Time: (\d+)', line)
+            match = re.search(
+                r'Point (\d+): Lat: ([\d.]+), Long: ([\d.]+), MAE: ([\d.E+-]+), Group: (\d+), Time: (\d+)', line)
             if match:
                 point_index = int(match.group(1))
                 lat = float(match.group(2))
@@ -68,14 +92,17 @@ for file_path in data_files:
         for line in file:
             match = re.search(r'([\d.]+), ([\d.]+)', line)
             if match:
-                lon = float(match.group(1))
-                lat = float(match.group(2))
+                lat = float(match.group(1))
+                lon = float(match.group(2))
                 ref_data.append((lat, lon))
 
 smoothed_data = np.array(smoothed_data)
 original_data = np.array(original_data)
+
 ref_data = np.array(ref_data)
 interpolated_ref_data = np.array(interpolate_reference(ref_data, len(smoothed_data)))
+smoothed_coords = smoothed_data[:, 1:3]
+interpolated_smoothed_coords = np.array(interpolate_reference(smoothed_coords, len(smoothed_data)))
 
 
 def group_data(data):
@@ -144,8 +171,8 @@ def calculate_groups_errors(grouped_smoothed_data, grouped_original_data, ref_da
         errors_original.append(error_original)
 
         # Print selected indices
-        print(
-            f'Group: {group}, Selected smoothed point index: {rep_point_index}, Selected original point index: {closest_point_index}')
+        # print(
+        #    f'Group: {group}, Selected smoothed point index: {rep_point_index}, Selected original point index: {closest_point_index}')
 
     mean_error_smoothed = total_error_smoothed / num_groups
     mean_error_original = total_error_original / num_groups
@@ -162,7 +189,7 @@ def calculate_groups_errors(grouped_smoothed_data, grouped_original_data, ref_da
     median_error_smoothed = np.median(errors_smoothed)
     median_error_original = np.median(errors_original)
 
-    return mean_error_smoothed, mean_error_original, mse_smoothed, mse_original, mae_smoothed, mae_original, rmse_smoothed, rmse_original, median_error_smoothed, median_error_original
+    return mean_error_smoothed, mean_error_original, mse_smoothed, mse_original, mae_smoothed, mae_original, rmse_smoothed, rmse_original, median_error_smoothed, median_error_original, errors_smoothed
 
 
 def calculate_group_mean(grouped_data, ref_data):
@@ -205,72 +232,117 @@ def calculate_mean_euclidean_error(smoothed_data, ref_data):
         errors.append(error)
         total_error += error
     mean_error = total_error / num_points
-    print("mediana dla kolejnych punktów:", np.median(errors))
-    return mean_error
+    print("mediana dla kolejnych punktów bez uwzględniania grup:", np.median(errors))
+    return mean_error, errors
 
 
 def calculate_mse(smoothed_data, ref_data):
     """
-    Oblicza błąd średniokwadratowy (MSE) pomiędzy danymi wygładzonymi a danymi referencyjnymi przy użyciu NumPy.
+    Oblicza MSE
     """
-    smoothed_data = np.array(smoothed_data)[:, 1:3]  # Pomiń pierwszą kolumnę, przekonwertuj na NumPy array
-    ref_data = np.array(ref_data)
-    squared_error = np.sum((smoothed_data - ref_data) ** 2, axis=1)
-    mean_squared_error = np.mean(squared_error)
-    return mean_squared_error
+    errors = []
+    total_error = 0
+    num_points = len(smoothed_data)
+    for i in range(num_points):
+        error = pow(euclidean_distance(smoothed_data[i][1:], ref_data[i]), 2)
+        errors.append(error)
+        total_error += error
+    mean_error = total_error / num_points
+    return mean_error
+
+
+def calculate_rmse(smoothed_data, ref_data):
+    """
+    Oblicza RMSE
+    """
+    errors = []
+    total_error = 0
+    num_points = len(smoothed_data)
+    for i in range(num_points):
+        error = pow(euclidean_distance(smoothed_data[i][1:], ref_data[i]), 2)
+        errors.append(error)
+        total_error += error
+    mean_error = total_error / num_points
+    return math.sqrt(mean_error)
 
 
 def calculate_mae(smoothed_data, ref_data):
-    # Przekształcenie danych wejściowych na tablice NumPy i pominiecie pierwszej kolumny w smoothed_data, jeśli jest to potrzebne
-    smoothed_array = np.array(smoothed_data)[:, 1:3]  # Zakładamy, że pierwsza kolumna to czas lub inny identyfikator
-    ref_array = np.array(ref_data)
-
-    # Obliczenie wartości bezwzględnych różnic pomiędzy odpowiadającymi sobie elementami
-    absolute_errors = np.abs(smoothed_array - ref_array)
-    #print(absolute_errors)
-
-    # Obliczenie średniej z wartości bezwzględnych różnic
-    mean_absolute_error = np.mean(absolute_errors)
-    return mean_absolute_error
+    """
+    Oblicza MAE
+    """
+    errors = []
+    total_error = 0
+    num_points = len(smoothed_data)
+    for i in range(num_points):
+        error = abs(euclidean_distance(smoothed_data[i][1:], ref_data[i]))
+        errors.append(error)
+        total_error += error
+    mean_error = total_error / num_points
+    return mean_error
 
 
 grouped_smoothed_data = group_data(smoothed_data)  # Grupy dla wygładzonych danych
-grouped_original_data = group_data_by_original(original_data, smoothed_data)  # Grupy dla oryginalnych danych na podstawie grup z wygładzonych danych
-#print("Ilość grup:", len(grouped_smoothed_data))
-#print("Ilość grup2:", len(grouped_original_data))
-mean_error, mean_error3, mse, mse2, mae, mae2, rmsd, rmsd2, median, median2 = calculate_groups_errors(grouped_smoothed_data, grouped_original_data, interpolated_ref_data)
+grouped_original_data = group_data_by_original(original_data,
+                                               smoothed_data)  # Grupy dla oryginalnych danych na podstawie grup z wygładzonych danych
+print("Ilość grup:", len(grouped_smoothed_data))
+print("Ilość grup2:", len(grouped_original_data))
+mean_error, mean_error3, mse, mse2, mae, mae2, rmsd, rmsd2, median, median2, errors = calculate_groups_errors(
+    grouped_smoothed_data, grouped_original_data, interpolated_ref_data)
 mean_error2 = calculate_group_mean(grouped_smoothed_data, ref_data)
-mean_error_no_groups = calculate_mean_euclidean_error(smoothed_data, interpolated_ref_data)
+mean_error_no_groups, errors2 = calculate_mean_euclidean_error(smoothed_data, interpolated_ref_data)
 mse_no_groups = calculate_mse(smoothed_data, interpolated_ref_data)
 mae_no_groups = calculate_mae(smoothed_data, interpolated_ref_data)
-
+rmse = calculate_rmse(smoothed_data, interpolated_ref_data)
 print("Średni błąd najlepszych z grup wygładzonych: ", mean_error)
 print("Średni błąd najlepszych z grup wygładzonych względem niezinterpolowanych: ", mean_error2)
 print("MSE najlepszych z grup wygładzonych: ", mse)
-print("MAE najlepszych z grup wygładzonych: ", mae)
+#print("MAE najlepszych z grup wygładzonych: ", mae)
 print("RMSE najlepszych z grup wygładzonych: ", rmsd)
 print("Błąd medianowy z grup wygładzonych: ", median)
 print("Średni błąd odległości euklidesowych bez uwzględniania grup danych wygładzonych: ", mean_error_no_groups)
 print("Średni błąd MSE bez uwzględniania grup danych wygładzonych: ", mse_no_groups)
-print("Średni błąd MAE bez uwzględniania grup danych wygładzonych: ", mae_no_groups)
+#print("Średni błąd MAE bez uwzględniania grup danych wygładzonych: ", mae_no_groups)
+print("Średni błąd RMSE bez uwzględniania grup danych wygładzonych : ", rmse)
+print("-------------------------------------")
+print(len(interpolated_ref_data))
+print(len(original_data))
+print(len(smoothed_data))
+mean_error4 = calculate_group_mean(grouped_original_data, ref_data)
 mean_error_no_groups2 = calculate_mean_euclidean_error(original_data, interpolated_ref_data)
 mse_no_groups2 = calculate_mse(original_data, interpolated_ref_data)
 mae_no_groups2 = calculate_mae(original_data, interpolated_ref_data)
+rmse_no_groups2 = calculate_rmse(original_data, interpolated_ref_data)
 print("Średni błąd najlepszych z grup oryginalnych: ", mean_error3)
+print("Średni błąd najlepszych z grup oryginalnych względem niezinterpolowanych: ", mean_error4)
 print("MSE najlepszych z grup oryginalnych: ", mse2)
-print("MAE najlepszych z grup oryginalnych: ", mae2)
 print("RMSE najlepszych z grup oryginalnych: ", rmsd2)
 print("Błąd medianowy z grupy oryginalnych: ", median2)
 print("Średni błąd odległości euklidesowych bez uwzględniania grup danych oryginalnych: ", mean_error_no_groups2)
 print("Średni błąd MSE bez uwzględniania grup danych oryginalnych: ", mse_no_groups2)
-print("Średni błąd MAE bez uwzględniania grup danych oryginalnych: ", mae_no_groups2)
+print("Średni błąd RMSE bez uwzględniania grup danych oryginalnych: ", rmse_no_groups2)
+interpolated_ref_data_np = np.array(interpolated_ref_data)
+smoothed_coords_np = np.array(interpolated_smoothed_coords)
+#errors = [euclidean_errors(interpolated_ref_data_np[i], smoothed_coords_np[i]) for i in range(len(interpolated_ref_data))]
+print(errors)
 
+# Tworzenie wykresu, gdzie każda grupa ma inny kolor
+group_colors = ['blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black', 'orange', 'purple', 'brown']
 
-errors = np.linalg.norm(np.array(interpolated_ref_data) - smoothed_data[:, 1:3], axis=1)
+fig, ax = plt.subplots(figsize=(10, 7))
 
+# Rysowanie punktów oryginalnych danych z kolorami grup
+for group, points in grouped_original_data.items():
+    points = np.array(points)
+    ax.scatter(points[:, 1], points[:, 2], label=f'Group {int(group)}', color=group_colors[int(group) % len(group_colors)])
+
+ax.set_xlabel('Latitude')
+ax.set_ylabel('Longitude')
+ax.legend(bbox_to_anchor=(1.05, 1.2), loc='upper left')
+plt.title('Wykres punktów oryginalnych z podziałem na grupy.')
+plt.show()
 
 # Obliczenie mediany
-#median_center = np.median(original_data[:, 1:], axis=0)
+# median_center = np.median(original_data[:, 1:], axis=0)
 
 # Tworzenie wykresów
 fig, axs = plt.subplots(1, 2, figsize=(15, 10))
@@ -289,23 +361,25 @@ axs[0].set_xlabel('Latitude')
 axs[0].set_ylabel('Longitude')
 axs[0].legend()
 
-max_distance = 0.1
+max_distance = 0.00018
 
 # Wykres linii
 original_path = original_data[:, 1:3]
 smoothed_path = smoothed_data[:, 1:3]
+smoothed_data = smoothed_data[np.lexsort((smoothed_data[:, 5], smoothed_data[:, 4]))]
 ref_path = interpolated_ref_data
 
 # Rysuj linię między punktami blisko siebie
 for i in range(len(original_path) - 1):
-    if euclidean_distance(original_path[i], original_path[i + 1]) < max_distance:
-        axs[1].plot([original_path[i, 0], original_path[i + 1, 0]], [original_path[i, 1], original_path[i + 1, 1]],
-                    c='b', label="Original path")
+    axs[1].plot([original_data[i, 1], original_data[i + 1, 1]],  # Lat
+                [original_data[i, 2], original_data[i + 1, 2]],  # Lon
+                c='blue', label="Original path")
 
-for i in range(len(smoothed_path) - 1):
-    if euclidean_distance(smoothed_path[i], smoothed_path[i + 1]) < max_distance:
-        axs[1].plot([smoothed_path[i, 0], smoothed_path[i + 1, 0]], [smoothed_path[i, 1], smoothed_path[i + 1, 1]],
-                    c='orange', label="Smoothed path")
+for i in range(len(smoothed_data) - 1):
+    axs[1].plot([smoothed_data[i, 1], smoothed_data[i + 1, 1]],  # Lat
+             [smoothed_data[i, 2], smoothed_data[i + 1, 2]],  # Lon
+             c='orange')
+
 for i in range(len(ref_path) - 1):
     if euclidean_distance(ref_path[i], ref_path[i + 1]) < max_distance:
         axs[1].plot([ref_path[i, 0], ref_path[i + 1, 0]],
@@ -325,8 +399,8 @@ plt.show()
 
 fig, axs = plt.subplots(1, 3, figsize=(15, 10))
 
-# Wykres błędów
-axs[0].plot(smoothed_data[:, 0], errors, label='Errors')
+# Wykres błędów errors2 dla Kalmana
+axs[0].plot(np.arange(0, 28), errors, label='Errors')
 axs[0].set_xlabel('Index')
 axs[0].set_ylabel('Error')
 axs[0].legend()
@@ -370,8 +444,6 @@ for i in range(len(smoothed_path) - 1):
         ax.plot([smoothed_data[i, 1], smoothed_data[i + 1, 1]], [smoothed_data[i, 2], smoothed_data[i + 1, 2]],
                 [smoothed_data[i, 0], smoothed_data[i + 1, 0]], c='orange')
 
-
-
 # Ustawienie etykiet osi
 ax.set_xlabel('Latitude')
 ax.set_ylabel('Longitude')
@@ -382,7 +454,6 @@ ax.legend(handles=[
     plt.Line2D([], [], color='orange', label='Smoothed Path')
 ])
 
-#ax.legend(['Original Path (blue)', 'Smoothed Path (orange)', 'Index (red)'])
-
+# ax.legend(['Original Path (blue)', 'Smoothed Path (orange)', 'Index (red)'])
 
 plt.show()
