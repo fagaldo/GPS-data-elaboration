@@ -1,22 +1,33 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Dane z Tabeli 11
-methods_1 = ['SMA', 'LOWESS', 'FMA', 'Filtr Kalmana', 'WMA', 'Dane oryginalne']
-med_1 = [3.374e-5, 3.3725e-5, 3.4033e-5, 2.2605e-5, 3.4946e-5, 3.5587e-5]
-mse_1 = [1.6257e-9, 1.6246e-9, 1.6784e-9, 9.4652e-10, 1.7996e-9, 1.9281e-9]
-rmse_1 = [4.032e-5, 4.03e-5, 4.0968e-5, 3.0765e-5, 4.2422e-5, 4.391e-5]
-mediana_1 = [3.183e-5, 3.1821e-5, 2.9865e-5, 1.5439e-5, 3.1458e-5, 2.952e-5]
+##
+# \file kolumnowe.py
+# \brief Skrypt do wizualizacji danych błędów dla różnych metod wygładzania w formie wykresów kolumnowych.
+#
+# Skrypt wykorzystuje dane z tabeli, tworzy wykresy kolumnowe dla różnych parametrów błędów (MED, MSE, RMSE, Mediana) oraz
+# wizualizuje je na wykresach w skali logarytmicznej. Wykresy przedstawiają porównanie metod dla różnych zestawów danych.
 
-# Dane z Tabeli 12
+# Dane z Tabeli 1
+methods_1 = ['SMA', 'LOWESS', 'FMA', 'Filtr Kalmana', 'WMA', 'Dane oryginalne']
+med_1 = [2.426e-5, 2.405e-5, 2.422e-5, 1.79e-5, 2.252e-5, 2.5073e-5]
+mse_1 = [7.712e-10, 7.627e-10, 7.569e-10, 4.457e-10, 6.931e-10, 8.63e-10]
+rmse_1 = [2.777e-5, 2.762e-5, 2.751e-5, 2.111e-5, 2.632e-5, 2.9378e-5]
+mediana_1 = [2.208e-5, 2.207e-5, 2.198e-5, 1.623e-6, 2.014e-5, 2.2815e-5]
+
+# Dane z Tabeli 2
 methods_2 = ['SMA', 'LOWESS', 'FMA', 'Filtr Kalmana', 'WMA', 'Dane oryginalne']
-med_2 = [0.000144, 0.0001439, 0.0001417, 0.000133, 0.0001423, 0.000134]
-mse_2 = [2.8323e-8, 2.8313e-8, 2.7473e-8, 2.1475e-8, 2.7803e-8, 2.1485e-8]
-rmse_2 = [0.00016829, 0.00016826, 0.0001657, 0.0001465, 0.0001667, 0.0001560]
-mediana_2 = [0.00012749, 0.00012747, 0.0001261, 0.0001389, 0.0001271, 0.0001398]
+med_2 = [0.0001206, 0.0001204, 0.000121, 0.000107, 0.000119, 0.0001075]
+mse_2 = [2.149e-8, 2.146e-8, 2.2e-8, 1.585e-8, 2.113e-8, 1.591e-8]
+rmse_2 = [0.0001466, 0.0001462, 0.0001481, 0.0001259, 0.0001453, 0.0001261]
+mediana_2 = [9.843e-5, 9.83e-5, 0.00010004, 9.704e-5, 0.00010073, 0.0001008]
 
 x = np.arange(len(methods_1))  # pozycje na osi X
 width = 0.2  # szerokość kolumn
+
+##
+# \brief Tworzenie wykresów kolumnowych dla zestawów danych z Tabeli 1 i Tabeli 2.
+# \details Ustawienia osi X, Y oraz etykiet. Wykresy przedstawiają wartości błędów w skali logarytmicznej.
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 14))
 
@@ -30,7 +41,7 @@ rects1_4 = ax1.bar(x + 1.5*width, mediana_1, width, label='Mediana')
 ax1.set_xlabel('Metoda')
 ax1.set_ylabel('Wartość błędu')
 ax1.set_yscale('log')  # Ustawienie skali logarytmicznej
-ax1.set_title('Wizualizacja wartości błędów z tabeli 11')
+ax1.set_title('Wizualizacja wartości błędów z tabeli 1')
 ax1.set_xticks(x)
 ax1.set_xticklabels(methods_1)
 ax1.legend()
@@ -45,18 +56,22 @@ rects2_4 = ax2.bar(x + 1.5*width, mediana_2, width, label='Mediana')
 ax2.set_xlabel('Metoda')
 ax2.set_ylabel('Wartość błędu')
 ax2.set_yscale('log')  # Ustawienie skali logarytmicznej
-ax2.set_title('Wizualizacja wartości błędów z tabeli 12')
+ax2.set_title('Wizualizacja wartości błędów z tabeli 2')
 ax2.set_xticks(x)
 ax2.set_xticklabels(methods_2)
 ax2.legend()
 
-# Funkcja do dodawania wartości nad kolumnami
+##
+# \brief Funkcja dodająca wartości błędów nad kolumnami na wykresach.
+# \param ax Oś, na której umieszczony jest wykres.
+# \param rects Lista kolumn, do których będą dodawane wartości błędów.
+
 def autolabel(ax, rects):
     for rect in rects:
         height = rect.get_height()
         ax.annotate(f'{height:.2e}',
                     xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),  # 3 points vertical offset
+                    xytext=(0, 3),  # Przesunięcie wartości o 3 punkty w górę
                     textcoords="offset points",
                     ha='center', va='bottom')
 
@@ -70,25 +85,30 @@ autolabel(ax2, rects2_2)
 autolabel(ax2, rects2_3)
 autolabel(ax2, rects2_4)
 
+# Ustawienie układu i wyświetlenie wykresów
 fig.tight_layout()
 plt.show()
-# Dane z Tabeli 13
+
+
+# Dane z tabeli 3 i 4
 methods_3 = ['SMA', 'LOWESS', 'FMA', 'Filtr Kalmana', 'WMA', 'Dane oryginalne']
-med_3 = [4.48645e-5, 4.47666e-5, 4.49794e-5, 3.51071e-5, 4.56157e-5, 4.7689e-5]
-mse_3 = [2.49556e-9, 2.48883e-9, 2.50379e-9, 1.70718e-9, 2.52859e-9, 2.81510e-9]
-rmse_3 = [4.995559e-5, 4.988826e-5, 5.003796e-5, 4.131814e-5, 5.028517e-5, 5.305759e-5]
-mediana_3 = [4.556783e-5, 4.552557e-5, 4.558475e-5, 3.345327e-5, 4.82769e-5, 4.85030e-5]
+med_3 = [2.7245e-5, 2.5288e-5, 2.5782e-5, 1.3462e-5, 2.5942e-5, 3.0398e-5]
+mse_3 = [8.8167e-10, 7.8341e-10, 7.7622e-10, 2.3869e-10, 8.1655e-10, 1.1928e-9]
+rmse_3 = [2.9692e-5, 2.7989e-5, 2.786e-5, 1.5449e-5, 2.8575e-5, 3.4536e-5]
+mediana_3 = [2.7446e-5, 2.661e-5, 2.7342e-5, 1.4534e-5, 2.3687e-5, 2.8072e-5]
 
-# Dane z Tabeli 14
 methods_4 = ['SMA', 'LOWESS', 'FMA', 'Filtr Kalmana', 'WMA', 'Dane oryginalne']
-med_4 = [0.0002031668, 0.0002030674, 0.00020466, 0.0001962, 0.00021854, 0.0001971]
-mse_4 = [6.224568e-8, 6.221389e-8, 6.322511e-8, 5.460528e-8, 7.16250e-8, 5.51674e-8]
-rmse_4 = [0.00024949, 0.000249427, 0.000251446, 0.00023367, 0.00026762, 0.0002384]
-mediana_4 = [0.000158516, 0.000158523, 0.000168508, 0.00015230, 0.00018144, 0.000156997]
-
+med_4 = [0.0001258, 0.0001174, 0.0001245, 6.505e-5, 0.0001299, 5.986e-5]
+mse_4 = [2.2271e-8, 1.9782e-8, 2.2558e-8, 6.7572e-9, 2.4743e-8, 4.3091e-9]
+rmse_4 = [0.0001492, 0.0001406, 0.0001501, 8.2202e-5, 0.0001573, 6.5647e-5]
+mediana_4 = [0.0001086, 0.000105, 0.0001074, 5.0468e-5, 0.0001117, 5.7155e-5]
 
 x = np.arange(len(methods_3))  # pozycje na osi X
 width = 0.2  # szerokość kolumn
+
+##
+# \brief Tworzenie wykresów kolumnowych dla zestawów danych z Tabeli 1 i Tabeli 2.
+# \details Ustawienia osi X, Y oraz etykiet. Wykresy przedstawiają wartości błędów w skali logarytmicznej.
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 14))
 
@@ -102,7 +122,7 @@ rects3_4 = ax1.bar(x + 1.5*width, mediana_3, width, label='Mediana')
 ax1.set_xlabel('Metoda')
 ax1.set_ylabel('Wartość błędu')
 ax1.set_yscale('log')  # Ustawienie skali logarytmicznej
-ax1.set_title('Wizualizacja wartości błędów z tabeli 13')
+ax1.set_title('Wizualizacja wartości błędów z tabeli 3')
 ax1.set_xticks(x)
 ax1.set_xticklabels(methods_3)
 ax1.legend()
@@ -117,11 +137,10 @@ rects4_4 = ax2.bar(x + 1.5*width, mediana_4, width, label='Mediana')
 ax2.set_xlabel('Metoda')
 ax2.set_ylabel('Wartość błędu')
 ax2.set_yscale('log')  # Ustawienie skali logarytmicznej
-ax2.set_title('Wizualizacja wartości błędów z tabeli 14')
+ax2.set_title('Wizualizacja wartości błędów z tabeli 4')
 ax2.set_xticks(x)
 ax2.set_xticklabels(methods_4)
 ax2.legend()
-
 
 # Dodawanie wartości nad kolumnami
 autolabel(ax1, rects3_1)
@@ -133,5 +152,6 @@ autolabel(ax2, rects4_2)
 autolabel(ax2, rects4_3)
 autolabel(ax2, rects4_4)
 
+# Ustawienie układu i wyświetlenie wykresów
 fig.tight_layout()
 plt.show()

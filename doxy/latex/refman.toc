@@ -1,0 +1,123 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Namespace Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Namespace List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Namespace Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}kolumnowe Namespace Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Function Documentation}{6}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}autolabel()}{6}{subsubsection.3.1.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Variable Documentation}{6}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}ax1}{6}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}ax2}{7}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}figsize}{7}{subsubsection.3.1.2.3}%
+\contentsline {subsubsection}{\numberline {3.1.2.4}med\_1}{7}{subsubsection.3.1.2.4}%
+\contentsline {subsubsection}{\numberline {3.1.2.5}med\_2}{7}{subsubsection.3.1.2.5}%
+\contentsline {subsubsection}{\numberline {3.1.2.6}med\_3}{7}{subsubsection.3.1.2.6}%
+\contentsline {subsubsection}{\numberline {3.1.2.7}med\_4}{7}{subsubsection.3.1.2.7}%
+\contentsline {subsubsection}{\numberline {3.1.2.8}mediana\_1}{7}{subsubsection.3.1.2.8}%
+\contentsline {subsubsection}{\numberline {3.1.2.9}mediana\_2}{7}{subsubsection.3.1.2.9}%
+\contentsline {subsubsection}{\numberline {3.1.2.10}mediana\_3}{8}{subsubsection.3.1.2.10}%
+\contentsline {subsubsection}{\numberline {3.1.2.11}mediana\_4}{8}{subsubsection.3.1.2.11}%
+\contentsline {subsubsection}{\numberline {3.1.2.12}methods\_1}{8}{subsubsection.3.1.2.12}%
+\contentsline {subsubsection}{\numberline {3.1.2.13}methods\_2}{8}{subsubsection.3.1.2.13}%
+\contentsline {subsubsection}{\numberline {3.1.2.14}methods\_3}{8}{subsubsection.3.1.2.14}%
+\contentsline {subsubsection}{\numberline {3.1.2.15}methods\_4}{8}{subsubsection.3.1.2.15}%
+\contentsline {subsubsection}{\numberline {3.1.2.16}mse\_1}{8}{subsubsection.3.1.2.16}%
+\contentsline {subsubsection}{\numberline {3.1.2.17}mse\_2}{8}{subsubsection.3.1.2.17}%
+\contentsline {subsubsection}{\numberline {3.1.2.18}mse\_3}{9}{subsubsection.3.1.2.18}%
+\contentsline {subsubsection}{\numberline {3.1.2.19}mse\_4}{9}{subsubsection.3.1.2.19}%
+\contentsline {subsubsection}{\numberline {3.1.2.20}rects1\_1}{9}{subsubsection.3.1.2.20}%
+\contentsline {subsubsection}{\numberline {3.1.2.21}rects1\_2}{9}{subsubsection.3.1.2.21}%
+\contentsline {subsubsection}{\numberline {3.1.2.22}rects1\_3}{9}{subsubsection.3.1.2.22}%
+\contentsline {subsubsection}{\numberline {3.1.2.23}rects1\_4}{9}{subsubsection.3.1.2.23}%
+\contentsline {subsubsection}{\numberline {3.1.2.24}rects2\_1}{9}{subsubsection.3.1.2.24}%
+\contentsline {subsubsection}{\numberline {3.1.2.25}rects2\_2}{9}{subsubsection.3.1.2.25}%
+\contentsline {subsubsection}{\numberline {3.1.2.26}rects2\_3}{10}{subsubsection.3.1.2.26}%
+\contentsline {subsubsection}{\numberline {3.1.2.27}rects2\_4}{10}{subsubsection.3.1.2.27}%
+\contentsline {subsubsection}{\numberline {3.1.2.28}rects3\_1}{10}{subsubsection.3.1.2.28}%
+\contentsline {subsubsection}{\numberline {3.1.2.29}rects3\_2}{10}{subsubsection.3.1.2.29}%
+\contentsline {subsubsection}{\numberline {3.1.2.30}rects3\_3}{10}{subsubsection.3.1.2.30}%
+\contentsline {subsubsection}{\numberline {3.1.2.31}rects3\_4}{10}{subsubsection.3.1.2.31}%
+\contentsline {subsubsection}{\numberline {3.1.2.32}rects4\_1}{10}{subsubsection.3.1.2.32}%
+\contentsline {subsubsection}{\numberline {3.1.2.33}rects4\_2}{10}{subsubsection.3.1.2.33}%
+\contentsline {subsubsection}{\numberline {3.1.2.34}rects4\_3}{11}{subsubsection.3.1.2.34}%
+\contentsline {subsubsection}{\numberline {3.1.2.35}rects4\_4}{11}{subsubsection.3.1.2.35}%
+\contentsline {subsubsection}{\numberline {3.1.2.36}rmse\_1}{11}{subsubsection.3.1.2.36}%
+\contentsline {subsubsection}{\numberline {3.1.2.37}rmse\_2}{11}{subsubsection.3.1.2.37}%
+\contentsline {subsubsection}{\numberline {3.1.2.38}rmse\_3}{11}{subsubsection.3.1.2.38}%
+\contentsline {subsubsection}{\numberline {3.1.2.39}rmse\_4}{11}{subsubsection.3.1.2.39}%
+\contentsline {subsubsection}{\numberline {3.1.2.40}width}{11}{subsubsection.3.1.2.40}%
+\contentsline {subsubsection}{\numberline {3.1.2.41}x}{11}{subsubsection.3.1.2.41}%
+\contentsline {section}{\numberline {3.2}main Namespace Reference}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Function Documentation}{13}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}calculate\_groups\_errors()}{13}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}calculate\_mean\_euclidean\_error()}{14}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}calculate\_mse()}{14}{subsubsection.3.2.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.1.4}calculate\_rmse()}{14}{subsubsection.3.2.1.4}%
+\contentsline {subsubsection}{\numberline {3.2.1.5}euclidean\_distance()}{16}{subsubsection.3.2.1.5}%
+\contentsline {subsubsection}{\numberline {3.2.1.6}find\_closest\_point()}{16}{subsubsection.3.2.1.6}%
+\contentsline {subsubsection}{\numberline {3.2.1.7}group\_data()}{17}{subsubsection.3.2.1.7}%
+\contentsline {subsubsection}{\numberline {3.2.1.8}group\_data\_by\_original()}{17}{subsubsection.3.2.1.8}%
+\contentsline {subsubsection}{\numberline {3.2.1.9}haversine\_distance()}{17}{subsubsection.3.2.1.9}%
+\contentsline {subsubsection}{\numberline {3.2.1.10}interpolate\_reference()}{18}{subsubsection.3.2.1.10}%
+\contentsline {subsection}{\numberline {3.2.2}Variable Documentation}{18}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}ax}{18}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}axs}{18}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}bbox\_to\_anchor}{18}{subsubsection.3.2.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.2.4}c}{19}{subsubsection.3.2.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.2.5}color}{19}{subsubsection.3.2.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.2.6}config}{19}{subsubsection.3.2.2.6}%
+\contentsline {subsubsection}{\numberline {3.2.2.7}config\_path}{19}{subsubsection.3.2.2.7}%
+\contentsline {subsubsection}{\numberline {3.2.2.8}data\_files}{19}{subsubsection.3.2.2.8}%
+\contentsline {subsubsection}{\numberline {3.2.2.9}errors}{19}{subsubsection.3.2.2.9}%
+\contentsline {subsubsection}{\numberline {3.2.2.10}errors2}{19}{subsubsection.3.2.2.10}%
+\contentsline {subsubsection}{\numberline {3.2.2.11}fig}{19}{subsubsection.3.2.2.11}%
+\contentsline {subsubsection}{\numberline {3.2.2.12}figsize}{20}{subsubsection.3.2.2.12}%
+\contentsline {subsubsection}{\numberline {3.2.2.13}full\_path}{20}{subsubsection.3.2.2.13}%
+\contentsline {subsubsection}{\numberline {3.2.2.14}group}{20}{subsubsection.3.2.2.14}%
+\contentsline {subsubsection}{\numberline {3.2.2.15}group\_colors}{20}{subsubsection.3.2.2.15}%
+\contentsline {subsubsection}{\numberline {3.2.2.16}grouped\_original\_data}{20}{subsubsection.3.2.2.16}%
+\contentsline {subsubsection}{\numberline {3.2.2.17}grouped\_smoothed\_data}{20}{subsubsection.3.2.2.17}%
+\contentsline {subsubsection}{\numberline {3.2.2.18}handles}{20}{subsubsection.3.2.2.18}%
+\contentsline {subsubsection}{\numberline {3.2.2.19}hb}{21}{subsubsection.3.2.2.19}%
+\contentsline {subsubsection}{\numberline {3.2.2.20}interpolated\_ref\_data}{21}{subsubsection.3.2.2.20}%
+\contentsline {subsubsection}{\numberline {3.2.2.21}interpolated\_ref\_data\_np}{21}{subsubsection.3.2.2.21}%
+\contentsline {subsubsection}{\numberline {3.2.2.22}label}{21}{subsubsection.3.2.2.22}%
+\contentsline {subsubsection}{\numberline {3.2.2.23}lat}{21}{subsubsection.3.2.2.23}%
+\contentsline {subsubsection}{\numberline {3.2.2.24}loc}{21}{subsubsection.3.2.2.24}%
+\contentsline {subsubsection}{\numberline {3.2.2.25}lon}{21}{subsubsection.3.2.2.25}%
+\contentsline {subsubsection}{\numberline {3.2.2.26}mae}{21}{subsubsection.3.2.2.26}%
+\contentsline {subsubsection}{\numberline {3.2.2.27}mae2}{22}{subsubsection.3.2.2.27}%
+\contentsline {subsubsection}{\numberline {3.2.2.28}match}{22}{subsubsection.3.2.2.28}%
+\contentsline {subsubsection}{\numberline {3.2.2.29}max\_distance}{22}{subsubsection.3.2.2.29}%
+\contentsline {subsubsection}{\numberline {3.2.2.30}mean\_error}{22}{subsubsection.3.2.2.30}%
+\contentsline {subsubsection}{\numberline {3.2.2.31}mean\_error3}{22}{subsubsection.3.2.2.31}%
+\contentsline {subsubsection}{\numberline {3.2.2.32}mean\_error\_no\_groups}{22}{subsubsection.3.2.2.32}%
+\contentsline {subsubsection}{\numberline {3.2.2.33}mean\_error\_no\_groups2}{22}{subsubsection.3.2.2.33}%
+\contentsline {subsubsection}{\numberline {3.2.2.34}median}{22}{subsubsection.3.2.2.34}%
+\contentsline {subsubsection}{\numberline {3.2.2.35}median2}{23}{subsubsection.3.2.2.35}%
+\contentsline {subsubsection}{\numberline {3.2.2.36}mse}{23}{subsubsection.3.2.2.36}%
+\contentsline {subsubsection}{\numberline {3.2.2.37}mse2}{23}{subsubsection.3.2.2.37}%
+\contentsline {subsubsection}{\numberline {3.2.2.38}mse\_no\_groups}{23}{subsubsection.3.2.2.38}%
+\contentsline {subsubsection}{\numberline {3.2.2.39}mse\_no\_groups2}{23}{subsubsection.3.2.2.39}%
+\contentsline {subsubsection}{\numberline {3.2.2.40}original\_data}{23}{subsubsection.3.2.2.40}%
+\contentsline {subsubsection}{\numberline {3.2.2.41}original\_path}{23}{subsubsection.3.2.2.41}%
+\contentsline {subsubsection}{\numberline {3.2.2.42}point\_index}{23}{subsubsection.3.2.2.42}%
+\contentsline {subsubsection}{\numberline {3.2.2.43}points}{24}{subsubsection.3.2.2.43}%
+\contentsline {subsubsection}{\numberline {3.2.2.44}ref\_data}{24}{subsubsection.3.2.2.44}%
+\contentsline {subsubsection}{\numberline {3.2.2.45}ref\_path}{24}{subsubsection.3.2.2.45}%
+\contentsline {subsubsection}{\numberline {3.2.2.46}rmsd}{24}{subsubsection.3.2.2.46}%
+\contentsline {subsubsection}{\numberline {3.2.2.47}rmsd2}{24}{subsubsection.3.2.2.47}%
+\contentsline {subsubsection}{\numberline {3.2.2.48}rmse}{24}{subsubsection.3.2.2.48}%
+\contentsline {subsubsection}{\numberline {3.2.2.49}rmse\_no\_groups2}{24}{subsubsection.3.2.2.49}%
+\contentsline {subsubsection}{\numberline {3.2.2.50}smoothed\_coords}{24}{subsubsection.3.2.2.50}%
+\contentsline {subsubsection}{\numberline {3.2.2.51}smoothed\_data}{25}{subsubsection.3.2.2.51}%
+\contentsline {subsubsection}{\numberline {3.2.2.52}smoothed\_path}{25}{subsubsection.3.2.2.52}%
+\contentsline {subsubsection}{\numberline {3.2.2.53}time}{25}{subsubsection.3.2.2.53}%
+\contentsline {chapter}{\numberline {4}File Documentation}{27}{chapter.4}%
+\contentsline {section}{\numberline {4.1}kolumnowe.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{27}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{28}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{28}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Detailed Description}{30}{subsection.4.2.1}%
+\contentsline {chapter}{Index}{31}{section*.11}%

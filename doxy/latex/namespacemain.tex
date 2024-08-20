@@ -1,0 +1,658 @@
+\hypertarget{namespacemain}{}\doxysection{main Namespace Reference}
+\label{namespacemain}\index{main@{main}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacemain_a33908d262e2f7d10c3127d30c74d2dcf}{euclidean\+\_\+distance}} (p1, p2)
+\begin{DoxyCompactList}\small\item\em Oblicza odległość euklidesową pomiędzy dwoma punktami. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_ae40678563737dba42e369f9cfe782a75}{haversine\+\_\+distance}} (coord1, coord2)
+\begin{DoxyCompactList}\small\item\em Oblicza odległość Haversine pomiędzy dwoma współrzędnymi geograficznymi. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_abefa981d0468ae120e6397ab5f7c6331}{interpolate\+\_\+reference}} (data, num\+\_\+points)
+\begin{DoxyCompactList}\small\item\em Interpoluje dane referencyjne, aby uzyskać określoną liczbę punktów. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_ab32c40335a7249b4ddc21f2f69104f36}{group\+\_\+data}} (data)
+\begin{DoxyCompactList}\small\item\em Grupuje dane wygładzone według grup. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_aa30b7bc85b52e634a61d23c44f2617f7}{group\+\_\+data\+\_\+by\+\_\+original}} (\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Grupuje dane oryginalne na podstawie grup z danych wygładzonych. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_a09475b5297d564c8ebbb8637c6b52c4d}{calculate\+\_\+groups\+\_\+errors}} (\mbox{\hyperlink{namespacemain_ae876a8bf1a4c177163db8f0e2dcb2c30}{grouped\+\_\+smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_a8a7b4d67c9c2f5df0cd4063a5cfa951b}{grouped\+\_\+original\+\_\+data}}, \mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Oblicza błędy dla grup danych wygładzonych i oryginalnych w odniesieniu do danych referencyjnych. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_ada5609de6c37f425c461d2799757a7c9}{find\+\_\+closest\+\_\+point}} (target\+\_\+point, reference\+\_\+points)
+\begin{DoxyCompactList}\small\item\em Znajduje najbliższy punkt do zadanego punktu docelowego wśród punktów referencyjnych. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_af2bcb2b2bb82ac5a5f879f118ade0f58}{calculate\+\_\+mean\+\_\+euclidean\+\_\+error}} (\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Oblicza średni błąd euklidesowy między danymi wygładzonymi a referencyjnymi. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_a2460f599d4b5966c85eca48ac01062ae}{calculate\+\_\+mse}} (\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Oblicza średni błąd kwadratowy (MSE). \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_a29fc2a2cd45753193c47d07764d25db9}{calculate\+\_\+rmse}} (\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Oblicza pierwiastek z średniego błędu kwadratowego (RMSE). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacemain_a7aca8d36b6df6f3b8ff4ad4fc17d034e}{config\+\_\+path}} = \textquotesingle{}config.\+yaml\textquotesingle{}
+\item 
+yaml \mbox{\hyperlink{namespacemain_a68d4002b6fe65d5d0a6e34a1a60ee1de}{config}} = yaml.\+safe\+\_\+load(config\+\_\+file)
+\item 
+yaml \mbox{\hyperlink{namespacemain_aa12465fcab373170804242498d52ca44}{data\+\_\+files}} = \mbox{\hyperlink{namespacemain_a68d4002b6fe65d5d0a6e34a1a60ee1de}{config}}\mbox{[}\textquotesingle{}data\+\_\+files\textquotesingle{}\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}} = \mbox{[}$\,$\mbox{]}
+\item 
+os \mbox{\hyperlink{namespacemain_a4fb78e73b85bec368b03c41c96480e5a}{full\+\_\+path}} = os.\+path.\+join(os.\+getcwd(), file\+\_\+path)
+\item 
+re \mbox{\hyperlink{namespacemain_ab630753662d240c1c314fb81bce54361}{match}} = re.\+search(r\textquotesingle{}Point (\textbackslash{}d+)\+:Latitude\+:(\mbox{[}\textbackslash{}d.\mbox{]}+)\textbackslash{}s\+Longitude\+:(\mbox{[}\textbackslash{}d.\mbox{]}+)\textquotesingle{}, line)
+\item 
+int \mbox{\hyperlink{namespacemain_a5d28261d4ea45b8f1f8d4e76f2bcfdd9}{point\+\_\+index}} = int(match.\+group(1))
+\item 
+float \mbox{\hyperlink{namespacemain_ae55f065c95e023aa6c2514b2b9ad4a22}{lat}} = float(match.\+group(2))
+\item 
+float \mbox{\hyperlink{namespacemain_af59ee077fefdb65db12a1543dde1d21f}{lon}} = float(match.\+group(3))
+\item 
+float \mbox{\hyperlink{namespacemain_a00580efdf9d27a169d296a4b5de7a735}{mae}} = float(match.\+group(4))
+\item 
+int \mbox{\hyperlink{namespacemain_a0242027ec3331f3d5793c42d21b6f4e1}{group}} = int(match.\+group(5))
+\item 
+int \mbox{\hyperlink{namespacemain_a42715f65f02da52edc5b22021d8ae670}{time}} = int(match.\+group(6))
+\item 
+np \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}} = np.\+array(\mbox{\hyperlink{namespacemain_abefa981d0468ae120e6397ab5f7c6331}{interpolate\+\_\+reference}}(\mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}}, len(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})))
+\item 
+list \mbox{\hyperlink{namespacemain_a87b2eefc4082b0e257038d1dc0b399bf}{smoothed\+\_\+coords}} = \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}
+\item 
+def \mbox{\hyperlink{namespacemain_ae876a8bf1a4c177163db8f0e2dcb2c30}{grouped\+\_\+smoothed\+\_\+data}} = \mbox{\hyperlink{namespacemain_ab32c40335a7249b4ddc21f2f69104f36}{group\+\_\+data}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})
+\item 
+def \mbox{\hyperlink{namespacemain_a8a7b4d67c9c2f5df0cd4063a5cfa951b}{grouped\+\_\+original\+\_\+data}} = \mbox{\hyperlink{namespacemain_aa30b7bc85b52e634a61d23c44f2617f7}{group\+\_\+data\+\_\+by\+\_\+original}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})
+\item 
+\mbox{\hyperlink{namespacemain_afdc2eb272883ed5d7054e9aeb4bff75a}{mean\+\_\+error}}
+\item 
+\mbox{\hyperlink{namespacemain_a8c93de9e6e64d75753bea1491bab7fa5}{mean\+\_\+error3}}
+\item 
+\mbox{\hyperlink{namespacemain_ae3588d6b8a60b8198aced11bfe3f2126}{mse}}
+\item 
+\mbox{\hyperlink{namespacemain_ad4790af5398b9085470e4f2e122a8b48}{mse2}}
+\item 
+\mbox{\hyperlink{namespacemain_a49838ce04c8d5e6a807027a215aaaf6b}{mae2}}
+\item 
+\mbox{\hyperlink{namespacemain_aa148655e59e02b15d98a238f4d8d349f}{rmsd}}
+\item 
+\mbox{\hyperlink{namespacemain_ad6622c4b8af2bef6d18473b3739d9469}{rmsd2}}
+\item 
+\mbox{\hyperlink{namespacemain_adb778fbcccecb4ebd8246f32e5419cac}{median}}
+\item 
+\mbox{\hyperlink{namespacemain_ab4c764b7ef3e600780031265a21b640f}{median2}}
+\item 
+\mbox{\hyperlink{namespacemain_acc42076253600be964e110149b458971}{errors}}
+\item 
+\mbox{\hyperlink{namespacemain_a7783e2da1d2c9d969de11e3397b22d0e}{mean\+\_\+error\+\_\+no\+\_\+groups}}
+\item 
+\mbox{\hyperlink{namespacemain_a843e2446ce192295df50244b83f5cfaa}{errors2}}
+\item 
+def \mbox{\hyperlink{namespacemain_a5492146421fb03e3878ace9ab2428e4a}{mse\+\_\+no\+\_\+groups}} = \mbox{\hyperlink{namespacemain_a2460f599d4b5966c85eca48ac01062ae}{calculate\+\_\+mse}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+def \mbox{\hyperlink{namespacemain_aa78a5db2328d845489f7f629e8fe17c1}{rmse}} = \mbox{\hyperlink{namespacemain_a29fc2a2cd45753193c47d07764d25db9}{calculate\+\_\+rmse}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+def \mbox{\hyperlink{namespacemain_ad078b37db020c2862764f57e2e7d7427}{mean\+\_\+error\+\_\+no\+\_\+groups2}} = \mbox{\hyperlink{namespacemain_af2bcb2b2bb82ac5a5f879f118ade0f58}{calculate\+\_\+mean\+\_\+euclidean\+\_\+error}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+def \mbox{\hyperlink{namespacemain_ada8d91f0ea4c59fec8317024e667cee1}{mse\+\_\+no\+\_\+groups2}} = \mbox{\hyperlink{namespacemain_a2460f599d4b5966c85eca48ac01062ae}{calculate\+\_\+mse}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+def \mbox{\hyperlink{namespacemain_a736f2f681a602bef31de7262eaded86c}{rmse\+\_\+no\+\_\+groups2}} = \mbox{\hyperlink{namespacemain_a29fc2a2cd45753193c47d07764d25db9}{calculate\+\_\+rmse}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+np \mbox{\hyperlink{namespacemain_a104e4a4ae1b96585ce5bbe95f60a69a9}{interpolated\+\_\+ref\+\_\+data\+\_\+np}} = np.\+array(\mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})
+\item 
+list \mbox{\hyperlink{namespacemain_acb4deded6f1dcd356dc41149c22eb32e}{group\+\_\+colors}} = \mbox{[}\textquotesingle{}blue\textquotesingle{}, \textquotesingle{}green\textquotesingle{}, \textquotesingle{}red\textquotesingle{}, \textquotesingle{}cyan\textquotesingle{}, \textquotesingle{}magenta\textquotesingle{}, \textquotesingle{}yellow\textquotesingle{}, \textquotesingle{}black\textquotesingle{}, \textquotesingle{}orange\textquotesingle{}, \textquotesingle{}purple\textquotesingle{}, \textquotesingle{}brown\textquotesingle{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacemain_a64aa603bc3c6c1587e7c6542452481ac}{fig}}
+\item 
+\mbox{\hyperlink{namespacemain_a8fa675eb2fcec5b95d9d21c670da7f30}{ax}}
+\item 
+\mbox{\hyperlink{namespacemain_a574732c04d57514f219fc914fdcb54e5}{figsize}}
+\item 
+np \mbox{\hyperlink{namespacemain_a1ca5319fe3759e36bf46a8c9c828dde6}{points}} = np.\+array(points)
+\item 
+\mbox{\hyperlink{namespacemain_a22f45a3cb4f074e609f58ebaeef0ecf9}{label}}
+\item 
+\mbox{\hyperlink{namespacemain_a37dbdc30935031c05304482e1be89d8f}{color}}
+\item 
+\mbox{\hyperlink{namespacemain_a411167eeca51189fabe03f884c7bf92c}{bbox\+\_\+to\+\_\+anchor}}
+\item 
+\mbox{\hyperlink{namespacemain_aeee9f371db14fda0de35d16324a167df}{loc}}
+\item 
+\mbox{\hyperlink{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}{axs}}
+\item 
+float \mbox{\hyperlink{namespacemain_adeb282dbe80c55fc35692b2ce86f18f1}{max\+\_\+distance}} = 0.\+00018
+\item 
+list \mbox{\hyperlink{namespacemain_a0d63e5e6fa2cf23d8fc48d1039340061}{original\+\_\+path}} = \mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacemain_a363374693b9c059c2591a0c547f76551}{smoothed\+\_\+path}} = \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}
+\item 
+np \mbox{\hyperlink{namespacemain_ac9c56151481ffe247a23845e046ac0ed}{ref\+\_\+path}} = \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}}
+\item 
+\mbox{\hyperlink{namespacemain_ae0323a9039add2978bf5b49550572c7c}{c}}
+\item 
+\mbox{\hyperlink{namespacemain_ac43bc603dfb3c49e15db8ef3c46f4316}{handles}}
+\item 
+\mbox{\hyperlink{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}{axs}} \mbox{\hyperlink{namespacemain_a0d8dd7ea73e5b383a7c210378e84fa89}{hb}} = \mbox{\hyperlink{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}{axs}}\mbox{[}1\mbox{]}.hexbin(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\mbox{]}, \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 2\mbox{]}, gridsize=50, cmap=\textquotesingle{}inferno\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacemain_a09475b5297d564c8ebbb8637c6b52c4d}\label{namespacemain_a09475b5297d564c8ebbb8637c6b52c4d}} 
+\index{main@{main}!calculate\_groups\_errors@{calculate\_groups\_errors}}
+\index{calculate\_groups\_errors@{calculate\_groups\_errors}!main@{main}}
+\doxysubsubsection{\texorpdfstring{calculate\_groups\_errors()}{calculate\_groups\_errors()}}
+{\footnotesize\ttfamily def calculate\+\_\+groups\+\_\+errors (\begin{DoxyParamCaption}\item[{}]{grouped\+\_\+smoothed\+\_\+data,  }\item[{}]{grouped\+\_\+original\+\_\+data,  }\item[{}]{ref\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Oblicza błędy dla grup danych wygładzonych i oryginalnych w odniesieniu do danych referencyjnych. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grouped\+\_\+smoothed\+\_\+data} & Zgrupowane dane wygładzone. \\
+\hline
+{\em grouped\+\_\+original\+\_\+data} & Zgrupowane dane oryginalne. \\
+\hline
+{\em ref\+\_\+data} & Dane referencyjne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Krotka zawierająca średnie błędy, MSE, MAE, RMSE i mediany błędów dla danych wygładzonych i oryginalnych. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_af2bcb2b2bb82ac5a5f879f118ade0f58}\label{namespacemain_af2bcb2b2bb82ac5a5f879f118ade0f58}} 
+\index{main@{main}!calculate\_mean\_euclidean\_error@{calculate\_mean\_euclidean\_error}}
+\index{calculate\_mean\_euclidean\_error@{calculate\_mean\_euclidean\_error}!main@{main}}
+\doxysubsubsection{\texorpdfstring{calculate\_mean\_euclidean\_error()}{calculate\_mean\_euclidean\_error()}}
+{\footnotesize\ttfamily def calculate\+\_\+mean\+\_\+euclidean\+\_\+error (\begin{DoxyParamCaption}\item[{}]{smoothed\+\_\+data,  }\item[{}]{ref\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Oblicza średni błąd euklidesowy między danymi wygładzonymi a referencyjnymi. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em smoothed\+\_\+data} & Dane wygładzone. \\
+\hline
+{\em ref\+\_\+data} & Dane referencyjne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Średni błąd euklidesowy i lista błędów dla każdego punktu. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_a2460f599d4b5966c85eca48ac01062ae}\label{namespacemain_a2460f599d4b5966c85eca48ac01062ae}} 
+\index{main@{main}!calculate\_mse@{calculate\_mse}}
+\index{calculate\_mse@{calculate\_mse}!main@{main}}
+\doxysubsubsection{\texorpdfstring{calculate\_mse()}{calculate\_mse()}}
+{\footnotesize\ttfamily def calculate\+\_\+mse (\begin{DoxyParamCaption}\item[{}]{smoothed\+\_\+data,  }\item[{}]{ref\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Oblicza średni błąd kwadratowy (MSE). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em smoothed\+\_\+data} & Dane wygładzone. \\
+\hline
+{\em ref\+\_\+data} & Dane referencyjne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wartość MSE. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_a29fc2a2cd45753193c47d07764d25db9}\label{namespacemain_a29fc2a2cd45753193c47d07764d25db9}} 
+\index{main@{main}!calculate\_rmse@{calculate\_rmse}}
+\index{calculate\_rmse@{calculate\_rmse}!main@{main}}
+\doxysubsubsection{\texorpdfstring{calculate\_rmse()}{calculate\_rmse()}}
+{\footnotesize\ttfamily def calculate\+\_\+rmse (\begin{DoxyParamCaption}\item[{}]{smoothed\+\_\+data,  }\item[{}]{ref\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Oblicza pierwiastek z średniego błędu kwadratowego (RMSE). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em smoothed\+\_\+data} & Dane wygładzone. \\
+\hline
+{\em ref\+\_\+data} & Dane referencyjne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wartość RMSE. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_a33908d262e2f7d10c3127d30c74d2dcf}\label{namespacemain_a33908d262e2f7d10c3127d30c74d2dcf}} 
+\index{main@{main}!euclidean\_distance@{euclidean\_distance}}
+\index{euclidean\_distance@{euclidean\_distance}!main@{main}}
+\doxysubsubsection{\texorpdfstring{euclidean\_distance()}{euclidean\_distance()}}
+{\footnotesize\ttfamily def euclidean\+\_\+distance (\begin{DoxyParamCaption}\item[{}]{p1,  }\item[{}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Oblicza odległość euklidesową pomiędzy dwoma punktami. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & Pierwszy punkt w formacie (x, y). \\
+\hline
+{\em p2} & Drugi punkt w formacie (x, y). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Odległość euklidesowa pomiędzy p1 a p2. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_ada5609de6c37f425c461d2799757a7c9}\label{namespacemain_ada5609de6c37f425c461d2799757a7c9}} 
+\index{main@{main}!find\_closest\_point@{find\_closest\_point}}
+\index{find\_closest\_point@{find\_closest\_point}!main@{main}}
+\doxysubsubsection{\texorpdfstring{find\_closest\_point()}{find\_closest\_point()}}
+{\footnotesize\ttfamily def find\+\_\+closest\+\_\+point (\begin{DoxyParamCaption}\item[{}]{target\+\_\+point,  }\item[{}]{reference\+\_\+points }\end{DoxyParamCaption})}
+
+
+
+Znajduje najbliższy punkt do zadanego punktu docelowego wśród punktów referencyjnych. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+point} & Punkt docelowy (x, y). \\
+\hline
+{\em reference\+\_\+points} & Lista punktów referencyjnych (x, y). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Najbliższy punkt referencyjny do target\+\_\+point. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_ab32c40335a7249b4ddc21f2f69104f36}\label{namespacemain_ab32c40335a7249b4ddc21f2f69104f36}} 
+\index{main@{main}!group\_data@{group\_data}}
+\index{group\_data@{group\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{group\_data()}{group\_data()}}
+{\footnotesize\ttfamily def group\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Grupuje dane wygładzone według grup. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dane wygładzone w formacie (indeks, szerokość, długość, MAE, grupa, czas). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Słownik, gdzie kluczem jest numer grupy, a wartością lista punktów należących do tej grupy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_aa30b7bc85b52e634a61d23c44f2617f7}\label{namespacemain_aa30b7bc85b52e634a61d23c44f2617f7}} 
+\index{main@{main}!group\_data\_by\_original@{group\_data\_by\_original}}
+\index{group\_data\_by\_original@{group\_data\_by\_original}!main@{main}}
+\doxysubsubsection{\texorpdfstring{group\_data\_by\_original()}{group\_data\_by\_original()}}
+{\footnotesize\ttfamily def group\+\_\+data\+\_\+by\+\_\+original (\begin{DoxyParamCaption}\item[{}]{original\+\_\+data,  }\item[{}]{smoothed\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Grupuje dane oryginalne na podstawie grup z danych wygładzonych. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em original\+\_\+data} & Dane oryginalne w formacie (indeks, szerokość, długość). \\
+\hline
+{\em smoothed\+\_\+data} & Dane wygładzone w formacie (indeks, szerokość, długość, MAE, grupa, czas). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Słownik, gdzie kluczem jest numer grupy, a wartością lista punktów oryginalnych należących do tej grupy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_ae40678563737dba42e369f9cfe782a75}\label{namespacemain_ae40678563737dba42e369f9cfe782a75}} 
+\index{main@{main}!haversine\_distance@{haversine\_distance}}
+\index{haversine\_distance@{haversine\_distance}!main@{main}}
+\doxysubsubsection{\texorpdfstring{haversine\_distance()}{haversine\_distance()}}
+{\footnotesize\ttfamily def haversine\+\_\+distance (\begin{DoxyParamCaption}\item[{}]{coord1,  }\item[{}]{coord2 }\end{DoxyParamCaption})}
+
+
+
+Oblicza odległość Haversine pomiędzy dwoma współrzędnymi geograficznymi. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coord1} & Pierwsza współrzędna w formacie (szerokość, długość). \\
+\hline
+{\em coord2} & Druga współrzędna w formacie (szerokość, długość). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Odległość w kilometrach pomiędzy coord1 a coord2. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_abefa981d0468ae120e6397ab5f7c6331}\label{namespacemain_abefa981d0468ae120e6397ab5f7c6331}} 
+\index{main@{main}!interpolate\_reference@{interpolate\_reference}}
+\index{interpolate\_reference@{interpolate\_reference}!main@{main}}
+\doxysubsubsection{\texorpdfstring{interpolate\_reference()}{interpolate\_reference()}}
+{\footnotesize\ttfamily def interpolate\+\_\+reference (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{num\+\_\+points }\end{DoxyParamCaption})}
+
+
+
+Interpoluje dane referencyjne, aby uzyskać określoną liczbę punktów. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Lista punktów referencyjnych w formacie (szerokość, długość). \\
+\hline
+{\em num\+\_\+points} & Liczba punktów do uzyskania po interpolacji. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lista interpolowanych punktów w formacie (szerokość, długość). 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacemain_a8fa675eb2fcec5b95d9d21c670da7f30}\label{namespacemain_a8fa675eb2fcec5b95d9d21c670da7f30}} 
+\index{main@{main}!ax@{ax}}
+\index{ax@{ax}!main@{main}}
+\doxysubsubsection{\texorpdfstring{ax}{ax}}
+{\footnotesize\ttfamily ax}
+
+\mbox{\Hypertarget{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}\label{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}} 
+\index{main@{main}!axs@{axs}}
+\index{axs@{axs}!main@{main}}
+\doxysubsubsection{\texorpdfstring{axs}{axs}}
+{\footnotesize\ttfamily axs}
+
+\mbox{\Hypertarget{namespacemain_a411167eeca51189fabe03f884c7bf92c}\label{namespacemain_a411167eeca51189fabe03f884c7bf92c}} 
+\index{main@{main}!bbox\_to\_anchor@{bbox\_to\_anchor}}
+\index{bbox\_to\_anchor@{bbox\_to\_anchor}!main@{main}}
+\doxysubsubsection{\texorpdfstring{bbox\_to\_anchor}{bbox\_to\_anchor}}
+{\footnotesize\ttfamily bbox\+\_\+to\+\_\+anchor}
+
+\mbox{\Hypertarget{namespacemain_ae0323a9039add2978bf5b49550572c7c}\label{namespacemain_ae0323a9039add2978bf5b49550572c7c}} 
+\index{main@{main}!c@{c}}
+\index{c@{c}!main@{main}}
+\doxysubsubsection{\texorpdfstring{c}{c}}
+{\footnotesize\ttfamily c}
+
+\mbox{\Hypertarget{namespacemain_a37dbdc30935031c05304482e1be89d8f}\label{namespacemain_a37dbdc30935031c05304482e1be89d8f}} 
+\index{main@{main}!color@{color}}
+\index{color@{color}!main@{main}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily color}
+
+\mbox{\Hypertarget{namespacemain_a68d4002b6fe65d5d0a6e34a1a60ee1de}\label{namespacemain_a68d4002b6fe65d5d0a6e34a1a60ee1de}} 
+\index{main@{main}!config@{config}}
+\index{config@{config}!main@{main}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily yaml config = yaml.\+safe\+\_\+load(config\+\_\+file)}
+
+\mbox{\Hypertarget{namespacemain_a7aca8d36b6df6f3b8ff4ad4fc17d034e}\label{namespacemain_a7aca8d36b6df6f3b8ff4ad4fc17d034e}} 
+\index{main@{main}!config\_path@{config\_path}}
+\index{config\_path@{config\_path}!main@{main}}
+\doxysubsubsection{\texorpdfstring{config\_path}{config\_path}}
+{\footnotesize\ttfamily str config\+\_\+path = \textquotesingle{}config.\+yaml\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacemain_aa12465fcab373170804242498d52ca44}\label{namespacemain_aa12465fcab373170804242498d52ca44}} 
+\index{main@{main}!data\_files@{data\_files}}
+\index{data\_files@{data\_files}!main@{main}}
+\doxysubsubsection{\texorpdfstring{data\_files}{data\_files}}
+{\footnotesize\ttfamily yaml data\+\_\+files = \mbox{\hyperlink{namespacemain_a68d4002b6fe65d5d0a6e34a1a60ee1de}{config}}\mbox{[}\textquotesingle{}data\+\_\+files\textquotesingle{}\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_acc42076253600be964e110149b458971}\label{namespacemain_acc42076253600be964e110149b458971}} 
+\index{main@{main}!errors@{errors}}
+\index{errors@{errors}!main@{main}}
+\doxysubsubsection{\texorpdfstring{errors}{errors}}
+{\footnotesize\ttfamily errors}
+
+\mbox{\Hypertarget{namespacemain_a843e2446ce192295df50244b83f5cfaa}\label{namespacemain_a843e2446ce192295df50244b83f5cfaa}} 
+\index{main@{main}!errors2@{errors2}}
+\index{errors2@{errors2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{errors2}{errors2}}
+{\footnotesize\ttfamily errors2}
+
+\mbox{\Hypertarget{namespacemain_a64aa603bc3c6c1587e7c6542452481ac}\label{namespacemain_a64aa603bc3c6c1587e7c6542452481ac}} 
+\index{main@{main}!fig@{fig}}
+\index{fig@{fig}!main@{main}}
+\doxysubsubsection{\texorpdfstring{fig}{fig}}
+{\footnotesize\ttfamily fig}
+
+\mbox{\Hypertarget{namespacemain_a574732c04d57514f219fc914fdcb54e5}\label{namespacemain_a574732c04d57514f219fc914fdcb54e5}} 
+\index{main@{main}!figsize@{figsize}}
+\index{figsize@{figsize}!main@{main}}
+\doxysubsubsection{\texorpdfstring{figsize}{figsize}}
+{\footnotesize\ttfamily figsize}
+
+\mbox{\Hypertarget{namespacemain_a4fb78e73b85bec368b03c41c96480e5a}\label{namespacemain_a4fb78e73b85bec368b03c41c96480e5a}} 
+\index{main@{main}!full\_path@{full\_path}}
+\index{full\_path@{full\_path}!main@{main}}
+\doxysubsubsection{\texorpdfstring{full\_path}{full\_path}}
+{\footnotesize\ttfamily os full\+\_\+path = os.\+path.\+join(os.\+getcwd(), file\+\_\+path)}
+
+\mbox{\Hypertarget{namespacemain_a0242027ec3331f3d5793c42d21b6f4e1}\label{namespacemain_a0242027ec3331f3d5793c42d21b6f4e1}} 
+\index{main@{main}!group@{group}}
+\index{group@{group}!main@{main}}
+\doxysubsubsection{\texorpdfstring{group}{group}}
+{\footnotesize\ttfamily int group = int(match.\+group(5))}
+
+\mbox{\Hypertarget{namespacemain_acb4deded6f1dcd356dc41149c22eb32e}\label{namespacemain_acb4deded6f1dcd356dc41149c22eb32e}} 
+\index{main@{main}!group\_colors@{group\_colors}}
+\index{group\_colors@{group\_colors}!main@{main}}
+\doxysubsubsection{\texorpdfstring{group\_colors}{group\_colors}}
+{\footnotesize\ttfamily list group\+\_\+colors = \mbox{[}\textquotesingle{}blue\textquotesingle{}, \textquotesingle{}green\textquotesingle{}, \textquotesingle{}red\textquotesingle{}, \textquotesingle{}cyan\textquotesingle{}, \textquotesingle{}magenta\textquotesingle{}, \textquotesingle{}yellow\textquotesingle{}, \textquotesingle{}black\textquotesingle{}, \textquotesingle{}orange\textquotesingle{}, \textquotesingle{}purple\textquotesingle{}, \textquotesingle{}brown\textquotesingle{}\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_a8a7b4d67c9c2f5df0cd4063a5cfa951b}\label{namespacemain_a8a7b4d67c9c2f5df0cd4063a5cfa951b}} 
+\index{main@{main}!grouped\_original\_data@{grouped\_original\_data}}
+\index{grouped\_original\_data@{grouped\_original\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{grouped\_original\_data}{grouped\_original\_data}}
+{\footnotesize\ttfamily def grouped\+\_\+original\+\_\+data = \mbox{\hyperlink{namespacemain_aa30b7bc85b52e634a61d23c44f2617f7}{group\+\_\+data\+\_\+by\+\_\+original}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_ae876a8bf1a4c177163db8f0e2dcb2c30}\label{namespacemain_ae876a8bf1a4c177163db8f0e2dcb2c30}} 
+\index{main@{main}!grouped\_smoothed\_data@{grouped\_smoothed\_data}}
+\index{grouped\_smoothed\_data@{grouped\_smoothed\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{grouped\_smoothed\_data}{grouped\_smoothed\_data}}
+{\footnotesize\ttfamily def grouped\+\_\+smoothed\+\_\+data = \mbox{\hyperlink{namespacemain_ab32c40335a7249b4ddc21f2f69104f36}{group\+\_\+data}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_ac43bc603dfb3c49e15db8ef3c46f4316}\label{namespacemain_ac43bc603dfb3c49e15db8ef3c46f4316}} 
+\index{main@{main}!handles@{handles}}
+\index{handles@{handles}!main@{main}}
+\doxysubsubsection{\texorpdfstring{handles}{handles}}
+{\footnotesize\ttfamily handles}
+
+\mbox{\Hypertarget{namespacemain_a0d8dd7ea73e5b383a7c210378e84fa89}\label{namespacemain_a0d8dd7ea73e5b383a7c210378e84fa89}} 
+\index{main@{main}!hb@{hb}}
+\index{hb@{hb}!main@{main}}
+\doxysubsubsection{\texorpdfstring{hb}{hb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}{axs}} hb = \mbox{\hyperlink{namespacemain_a5b5398ce3cb5c9b60d8bb20a94dc945b}{axs}}\mbox{[}1\mbox{]}.hexbin(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\mbox{]}, \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 2\mbox{]}, gridsize=50, cmap=\textquotesingle{}inferno\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}\label{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}} 
+\index{main@{main}!interpolated\_ref\_data@{interpolated\_ref\_data}}
+\index{interpolated\_ref\_data@{interpolated\_ref\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{interpolated\_ref\_data}{interpolated\_ref\_data}}
+{\footnotesize\ttfamily np interpolated\+\_\+ref\+\_\+data = np.\+array(\mbox{\hyperlink{namespacemain_abefa981d0468ae120e6397ab5f7c6331}{interpolate\+\_\+reference}}(\mbox{\hyperlink{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}{ref\+\_\+data}}, len(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}})))}
+
+\mbox{\Hypertarget{namespacemain_a104e4a4ae1b96585ce5bbe95f60a69a9}\label{namespacemain_a104e4a4ae1b96585ce5bbe95f60a69a9}} 
+\index{main@{main}!interpolated\_ref\_data\_np@{interpolated\_ref\_data\_np}}
+\index{interpolated\_ref\_data\_np@{interpolated\_ref\_data\_np}!main@{main}}
+\doxysubsubsection{\texorpdfstring{interpolated\_ref\_data\_np}{interpolated\_ref\_data\_np}}
+{\footnotesize\ttfamily np interpolated\+\_\+ref\+\_\+data\+\_\+np = np.\+array(\mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_a22f45a3cb4f074e609f58ebaeef0ecf9}\label{namespacemain_a22f45a3cb4f074e609f58ebaeef0ecf9}} 
+\index{main@{main}!label@{label}}
+\index{label@{label}!main@{main}}
+\doxysubsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily label}
+
+\mbox{\Hypertarget{namespacemain_ae55f065c95e023aa6c2514b2b9ad4a22}\label{namespacemain_ae55f065c95e023aa6c2514b2b9ad4a22}} 
+\index{main@{main}!lat@{lat}}
+\index{lat@{lat}!main@{main}}
+\doxysubsubsection{\texorpdfstring{lat}{lat}}
+{\footnotesize\ttfamily float lat = float(match.\+group(2))}
+
+\mbox{\Hypertarget{namespacemain_aeee9f371db14fda0de35d16324a167df}\label{namespacemain_aeee9f371db14fda0de35d16324a167df}} 
+\index{main@{main}!loc@{loc}}
+\index{loc@{loc}!main@{main}}
+\doxysubsubsection{\texorpdfstring{loc}{loc}}
+{\footnotesize\ttfamily loc}
+
+\mbox{\Hypertarget{namespacemain_af59ee077fefdb65db12a1543dde1d21f}\label{namespacemain_af59ee077fefdb65db12a1543dde1d21f}} 
+\index{main@{main}!lon@{lon}}
+\index{lon@{lon}!main@{main}}
+\doxysubsubsection{\texorpdfstring{lon}{lon}}
+{\footnotesize\ttfamily float lon = float(match.\+group(3))}
+
+\mbox{\Hypertarget{namespacemain_a00580efdf9d27a169d296a4b5de7a735}\label{namespacemain_a00580efdf9d27a169d296a4b5de7a735}} 
+\index{main@{main}!mae@{mae}}
+\index{mae@{mae}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mae}{mae}}
+{\footnotesize\ttfamily mae = float(match.\+group(4))}
+
+\mbox{\Hypertarget{namespacemain_a49838ce04c8d5e6a807027a215aaaf6b}\label{namespacemain_a49838ce04c8d5e6a807027a215aaaf6b}} 
+\index{main@{main}!mae2@{mae2}}
+\index{mae2@{mae2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mae2}{mae2}}
+{\footnotesize\ttfamily mae2}
+
+\mbox{\Hypertarget{namespacemain_ab630753662d240c1c314fb81bce54361}\label{namespacemain_ab630753662d240c1c314fb81bce54361}} 
+\index{main@{main}!match@{match}}
+\index{match@{match}!main@{main}}
+\doxysubsubsection{\texorpdfstring{match}{match}}
+{\footnotesize\ttfamily re match = re.\+search(r\textquotesingle{}Point (\textbackslash{}d+)\+:Latitude\+:(\mbox{[}\textbackslash{}d.\mbox{]}+)\textbackslash{}s\+Longitude\+:(\mbox{[}\textbackslash{}d.\mbox{]}+)\textquotesingle{}, line)}
+
+\mbox{\Hypertarget{namespacemain_adeb282dbe80c55fc35692b2ce86f18f1}\label{namespacemain_adeb282dbe80c55fc35692b2ce86f18f1}} 
+\index{main@{main}!max\_distance@{max\_distance}}
+\index{max\_distance@{max\_distance}!main@{main}}
+\doxysubsubsection{\texorpdfstring{max\_distance}{max\_distance}}
+{\footnotesize\ttfamily float max\+\_\+distance = 0.\+00018}
+
+\mbox{\Hypertarget{namespacemain_afdc2eb272883ed5d7054e9aeb4bff75a}\label{namespacemain_afdc2eb272883ed5d7054e9aeb4bff75a}} 
+\index{main@{main}!mean\_error@{mean\_error}}
+\index{mean\_error@{mean\_error}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mean\_error}{mean\_error}}
+{\footnotesize\ttfamily mean\+\_\+error}
+
+\mbox{\Hypertarget{namespacemain_a8c93de9e6e64d75753bea1491bab7fa5}\label{namespacemain_a8c93de9e6e64d75753bea1491bab7fa5}} 
+\index{main@{main}!mean\_error3@{mean\_error3}}
+\index{mean\_error3@{mean\_error3}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mean\_error3}{mean\_error3}}
+{\footnotesize\ttfamily mean\+\_\+error3}
+
+\mbox{\Hypertarget{namespacemain_a7783e2da1d2c9d969de11e3397b22d0e}\label{namespacemain_a7783e2da1d2c9d969de11e3397b22d0e}} 
+\index{main@{main}!mean\_error\_no\_groups@{mean\_error\_no\_groups}}
+\index{mean\_error\_no\_groups@{mean\_error\_no\_groups}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mean\_error\_no\_groups}{mean\_error\_no\_groups}}
+{\footnotesize\ttfamily mean\+\_\+error\+\_\+no\+\_\+groups}
+
+\mbox{\Hypertarget{namespacemain_ad078b37db020c2862764f57e2e7d7427}\label{namespacemain_ad078b37db020c2862764f57e2e7d7427}} 
+\index{main@{main}!mean\_error\_no\_groups2@{mean\_error\_no\_groups2}}
+\index{mean\_error\_no\_groups2@{mean\_error\_no\_groups2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mean\_error\_no\_groups2}{mean\_error\_no\_groups2}}
+{\footnotesize\ttfamily def mean\+\_\+error\+\_\+no\+\_\+groups2 = \mbox{\hyperlink{namespacemain_af2bcb2b2bb82ac5a5f879f118ade0f58}{calculate\+\_\+mean\+\_\+euclidean\+\_\+error}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_adb778fbcccecb4ebd8246f32e5419cac}\label{namespacemain_adb778fbcccecb4ebd8246f32e5419cac}} 
+\index{main@{main}!median@{median}}
+\index{median@{median}!main@{main}}
+\doxysubsubsection{\texorpdfstring{median}{median}}
+{\footnotesize\ttfamily median}
+
+\mbox{\Hypertarget{namespacemain_ab4c764b7ef3e600780031265a21b640f}\label{namespacemain_ab4c764b7ef3e600780031265a21b640f}} 
+\index{main@{main}!median2@{median2}}
+\index{median2@{median2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{median2}{median2}}
+{\footnotesize\ttfamily median2}
+
+\mbox{\Hypertarget{namespacemain_ae3588d6b8a60b8198aced11bfe3f2126}\label{namespacemain_ae3588d6b8a60b8198aced11bfe3f2126}} 
+\index{main@{main}!mse@{mse}}
+\index{mse@{mse}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mse}{mse}}
+{\footnotesize\ttfamily mse}
+
+\mbox{\Hypertarget{namespacemain_ad4790af5398b9085470e4f2e122a8b48}\label{namespacemain_ad4790af5398b9085470e4f2e122a8b48}} 
+\index{main@{main}!mse2@{mse2}}
+\index{mse2@{mse2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mse2}{mse2}}
+{\footnotesize\ttfamily mse2}
+
+\mbox{\Hypertarget{namespacemain_a5492146421fb03e3878ace9ab2428e4a}\label{namespacemain_a5492146421fb03e3878ace9ab2428e4a}} 
+\index{main@{main}!mse\_no\_groups@{mse\_no\_groups}}
+\index{mse\_no\_groups@{mse\_no\_groups}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mse\_no\_groups}{mse\_no\_groups}}
+{\footnotesize\ttfamily def mse\+\_\+no\+\_\+groups = \mbox{\hyperlink{namespacemain_a2460f599d4b5966c85eca48ac01062ae}{calculate\+\_\+mse}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_ada8d91f0ea4c59fec8317024e667cee1}\label{namespacemain_ada8d91f0ea4c59fec8317024e667cee1}} 
+\index{main@{main}!mse\_no\_groups2@{mse\_no\_groups2}}
+\index{mse\_no\_groups2@{mse\_no\_groups2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{mse\_no\_groups2}{mse\_no\_groups2}}
+{\footnotesize\ttfamily def mse\+\_\+no\+\_\+groups2 = \mbox{\hyperlink{namespacemain_a2460f599d4b5966c85eca48ac01062ae}{calculate\+\_\+mse}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}\label{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}} 
+\index{main@{main}!original\_data@{original\_data}}
+\index{original\_data@{original\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{original\_data}{original\_data}}
+{\footnotesize\ttfamily np original\+\_\+data = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_a0d63e5e6fa2cf23d8fc48d1039340061}\label{namespacemain_a0d63e5e6fa2cf23d8fc48d1039340061}} 
+\index{main@{main}!original\_path@{original\_path}}
+\index{original\_path@{original\_path}!main@{main}}
+\doxysubsubsection{\texorpdfstring{original\_path}{original\_path}}
+{\footnotesize\ttfamily list original\+\_\+path = \mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_a5d28261d4ea45b8f1f8d4e76f2bcfdd9}\label{namespacemain_a5d28261d4ea45b8f1f8d4e76f2bcfdd9}} 
+\index{main@{main}!point\_index@{point\_index}}
+\index{point\_index@{point\_index}!main@{main}}
+\doxysubsubsection{\texorpdfstring{point\_index}{point\_index}}
+{\footnotesize\ttfamily int point\+\_\+index = int(match.\+group(1))}
+
+\mbox{\Hypertarget{namespacemain_a1ca5319fe3759e36bf46a8c9c828dde6}\label{namespacemain_a1ca5319fe3759e36bf46a8c9c828dde6}} 
+\index{main@{main}!points@{points}}
+\index{points@{points}!main@{main}}
+\doxysubsubsection{\texorpdfstring{points}{points}}
+{\footnotesize\ttfamily np points = np.\+array(points)}
+
+\mbox{\Hypertarget{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}\label{namespacemain_aa1137a4b7b96644f6db5f6cbdf973ee3}} 
+\index{main@{main}!ref\_data@{ref\_data}}
+\index{ref\_data@{ref\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{ref\_data}{ref\_data}}
+{\footnotesize\ttfamily np ref\+\_\+data = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_ac9c56151481ffe247a23845e046ac0ed}\label{namespacemain_ac9c56151481ffe247a23845e046ac0ed}} 
+\index{main@{main}!ref\_path@{ref\_path}}
+\index{ref\_path@{ref\_path}!main@{main}}
+\doxysubsubsection{\texorpdfstring{ref\_path}{ref\_path}}
+{\footnotesize\ttfamily np ref\+\_\+path = \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}}}
+
+\mbox{\Hypertarget{namespacemain_aa148655e59e02b15d98a238f4d8d349f}\label{namespacemain_aa148655e59e02b15d98a238f4d8d349f}} 
+\index{main@{main}!rmsd@{rmsd}}
+\index{rmsd@{rmsd}!main@{main}}
+\doxysubsubsection{\texorpdfstring{rmsd}{rmsd}}
+{\footnotesize\ttfamily rmsd}
+
+\mbox{\Hypertarget{namespacemain_ad6622c4b8af2bef6d18473b3739d9469}\label{namespacemain_ad6622c4b8af2bef6d18473b3739d9469}} 
+\index{main@{main}!rmsd2@{rmsd2}}
+\index{rmsd2@{rmsd2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{rmsd2}{rmsd2}}
+{\footnotesize\ttfamily rmsd2}
+
+\mbox{\Hypertarget{namespacemain_aa78a5db2328d845489f7f629e8fe17c1}\label{namespacemain_aa78a5db2328d845489f7f629e8fe17c1}} 
+\index{main@{main}!rmse@{rmse}}
+\index{rmse@{rmse}!main@{main}}
+\doxysubsubsection{\texorpdfstring{rmse}{rmse}}
+{\footnotesize\ttfamily def rmse = \mbox{\hyperlink{namespacemain_a29fc2a2cd45753193c47d07764d25db9}{calculate\+\_\+rmse}}(\mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_a736f2f681a602bef31de7262eaded86c}\label{namespacemain_a736f2f681a602bef31de7262eaded86c}} 
+\index{main@{main}!rmse\_no\_groups2@{rmse\_no\_groups2}}
+\index{rmse\_no\_groups2@{rmse\_no\_groups2}!main@{main}}
+\doxysubsubsection{\texorpdfstring{rmse\_no\_groups2}{rmse\_no\_groups2}}
+{\footnotesize\ttfamily def rmse\+\_\+no\+\_\+groups2 = \mbox{\hyperlink{namespacemain_a29fc2a2cd45753193c47d07764d25db9}{calculate\+\_\+rmse}}(\mbox{\hyperlink{namespacemain_a87ab27c33f61d24f1211c61ffe1ecb6c}{original\+\_\+data}}, \mbox{\hyperlink{namespacemain_a43d64dd26c890766c6bd40e83bbe4f69}{interpolated\+\_\+ref\+\_\+data}})}
+
+\mbox{\Hypertarget{namespacemain_a87b2eefc4082b0e257038d1dc0b399bf}\label{namespacemain_a87b2eefc4082b0e257038d1dc0b399bf}} 
+\index{main@{main}!smoothed\_coords@{smoothed\_coords}}
+\index{smoothed\_coords@{smoothed\_coords}!main@{main}}
+\doxysubsubsection{\texorpdfstring{smoothed\_coords}{smoothed\_coords}}
+{\footnotesize\ttfamily list smoothed\+\_\+coords = \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_acd4f7403e245cc844d1cc8d649dba206}\label{namespacemain_acd4f7403e245cc844d1cc8d649dba206}} 
+\index{main@{main}!smoothed\_data@{smoothed\_data}}
+\index{smoothed\_data@{smoothed\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{smoothed\_data}{smoothed\_data}}
+{\footnotesize\ttfamily list smoothed\+\_\+data = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_a363374693b9c059c2591a0c547f76551}\label{namespacemain_a363374693b9c059c2591a0c547f76551}} 
+\index{main@{main}!smoothed\_path@{smoothed\_path}}
+\index{smoothed\_path@{smoothed\_path}!main@{main}}
+\doxysubsubsection{\texorpdfstring{smoothed\_path}{smoothed\_path}}
+{\footnotesize\ttfamily list smoothed\+\_\+path = \mbox{\hyperlink{namespacemain_acd4f7403e245cc844d1cc8d649dba206}{smoothed\+\_\+data}}\mbox{[}\+:, 1\+:3\mbox{]}}
+
+\mbox{\Hypertarget{namespacemain_a42715f65f02da52edc5b22021d8ae670}\label{namespacemain_a42715f65f02da52edc5b22021d8ae670}} 
+\index{main@{main}!time@{time}}
+\index{time@{time}!main@{main}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily int time = int(match.\+group(6))}
+

@@ -1,4 +1,4 @@
 data_files:
   - originalT4.txt  #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych oryginalnych
-  - smoothed WMA.txt #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych wygładzonych
+  - smoothed Kalman.txt #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych wygładzonych
   - referencyjneT4.txt #Pole z nazwą, lub ścieżką do pliku ze zbiorem danych referencyjnych
